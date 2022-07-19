@@ -17,10 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="412" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hmS-ef-95d">
-                        <rect key="frame" x="0.0" y="0.0" width="412" height="110"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ku0-gE-s73">
+                        <rect key="frame" x="10" y="10" width="392" height="90"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CnJ-8R-ZAo">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="q7k-dB-SXn">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -29,15 +29,15 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="hmS-ef-95d" secondAttribute="trailing" id="NaI-5w-CuR"/>
-                    <constraint firstItem="hmS-ef-95d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Rih-Xx-Bj9"/>
-                    <constraint firstAttribute="bottom" secondItem="hmS-ef-95d" secondAttribute="bottom" id="dfv-Dv-Q6F"/>
-                    <constraint firstItem="hmS-ef-95d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xTh-5Y-z26"/>
+                    <constraint firstAttribute="bottom" secondItem="Ku0-gE-s73" secondAttribute="bottom" constant="10" id="Gvd-Hy-Avx"/>
+                    <constraint firstItem="Ku0-gE-s73" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LXX-pz-f7d"/>
+                    <constraint firstAttribute="trailing" secondItem="Ku0-gE-s73" secondAttribute="trailing" constant="10" id="S9k-kD-oxE"/>
+                    <constraint firstItem="Ku0-gE-s73" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="VqG-kj-wCb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="collectionView" destination="hmS-ef-95d" id="0J3-yy-lOP"/>
+                <outlet property="collectionView" destination="Ku0-gE-s73" id="jXI-TN-A8V"/>
             </connections>
             <point key="canvasLocation" x="208.69565217391306" y="140.625"/>
         </tableViewCell>
