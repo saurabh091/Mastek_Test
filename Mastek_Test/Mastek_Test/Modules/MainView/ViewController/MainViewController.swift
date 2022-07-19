@@ -10,56 +10,33 @@ import UIKit
 class MainViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var rowNumber = 30
+    var rowNumber = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Register the xib for tableview cell
-        let mainCellNib = UINib(nibName: MainTableViewCell.reuseIdentifier, bundle: nil)
-        self.tableView.register(mainCellNib, forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
-        let secondaryCellNib = UINib(nibName: SecondaryTableViewCell.reuseIdentifier, bundle: nil)
-        self.tableView.register(secondaryCellNib, forCellReuseIdentifier: SecondaryTableViewCell.reuseIdentifier)
+        self.tableView.register(UINib(nibName: MainTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
+        self.tableView.register(UINib(nibName: SecondaryTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: SecondaryTableViewCell.reuseIdentifier)
         
-//        tableView.register(UINib(nibName: "CustomHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: CustomHeader.reuseIdentifier)
-        
-        let rightButtonItem = UIBarButtonItem.init(
-              title: "Update No. of Rows",
-              style: .done,
-              target: self,
-              action: #selector(rightButtonAction)
+        let rightButtonItem = UIBarButtonItem.init(title: "Update No. of Rows", style: .done, target: self, action: #selector(rightButtonAction)
         )
-
         self.navigationItem.rightBarButtonItem = rightButtonItem
     }
     
     @objc func rightButtonAction(sender: UIBarButtonItem) {
-        debugPrint("**************************    rightButtonAction    **************************")
-        
-        
         let rowsViewController: RowsViewController = self.storyboard?.instantiateViewController(withIdentifier: "RowsViewController") as! RowsViewController
         
-        rowsViewController.onCompletion = { rowString in
-            // this will be executed when `someButtonTapped(_:)` will be called
-            debugPrint("************* \(rowString)")
+        rowsViewController.sendDataBack = { [weak self] rowString in
+            guard let self = self else { return }
+            self.rowNumber = Int(rowString) ?? 0
+            self.tableView.reloadData()
         }
         
         let navigationController = UINavigationController(rootViewController: rowsViewController)
         navigationController.modalPresentationStyle = UIModalPresentationStyle.popover
         self.present(navigationController, animated: true, completion: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -75,31 +52,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return 100
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 100
-//    }
-    
-    // Category Title
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeader") as! CustomHeader
-////        headerView.customLabel.text = content[section].name  // set this however is appropriate for your app's model
-//        headerView.rows = rowNumber/2
-//        headerView.delegate = self
-//        return headerView
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row % 4 == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier) as? MainTableViewCell {
-                // Show SubCategory Title
-                //            let subCategoryTitle = colorsArray.objectsArray[indexPath.section].subcategory
-                //            cell.subCategoryLabel.text = subCategoryTitle[indexPath.row]
-                //
-                //            // Pass the data to colletionview inside the tableviewcell
-                //            let rowArray = colorsArray.objectsArray[indexPath.section].colors[indexPath.row]
-                //            cell.updateCellWith(row: rowArray)
-                cell.backgroundColor = .red
                 cell.rowNumber = rowNumber
+                cell.collectionView.reloadData()
+                cell.sendRowIndexBack = { [weak self] rowIndex, cellColor in
+                    debugPrint(rowIndex)
+                    guard let self = self else { return }
+                    self.navigateToResultView(rowIndex: indexPath.row, index: rowIndex, color: cellColor)
+                }
                 return cell
             }
         } else {
@@ -108,20 +70,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         }
-        
-        
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let resultViewController: ResultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
-        navigationController?.pushViewController(resultViewController, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) as? SecondaryTableViewCell else {
+            return
+        }
+        navigateToResultView(rowIndex: indexPath.row, index: nil, color: cell.backView.backgroundColor ?? .white)
     }
-}
-
-extension MainViewController: CustomHeaderDelegate {
-    func customHeader(_ customHeader: CustomHeader, didTapButtonInSection section: Int) {
-        print("did tap button", section)
+    
+    func navigateToResultView(rowIndex: Int?, index: Int?, color: UIColor) {
+        let resultView: ResultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        resultView.row = rowIndex
+        resultView.collectionIndex = index
+        resultView.backGroundColor = color
+        navigationController?.pushViewController(resultView, animated: true)
     }
 }
 

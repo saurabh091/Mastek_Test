@@ -10,16 +10,17 @@ import UIKit
 class RowsViewController: UIViewController {
     
     @IBOutlet weak var rowsTextField: UITextField!
-    var onCompletion: ((_ rowNumber :String) ->())?
+    var sendDataBack: ((_ rowNumber: String) ->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
+        rowsTextField.becomeFirstResponder()
     }
     
     @IBAction func doneAction(_ sender: Any) {
-        onCompletion?(rowsTextField.text ?? "")
+        sendDataBack?(rowsTextField.text ?? "")
         navigationController?.dismiss(animated: true)
     }
 

@@ -3,8 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,12 +17,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="195" height="190"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vus-oC-PYh">
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-y0-xdK">
                         <rect key="frame" x="72.5" y="70" width="50" height="50"/>
-                        <color key="backgroundColor" systemColor="linkColor"/>
+                        <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="PBC-e2-zmm"/>
-                            <constraint firstAttribute="width" secondItem="vus-oC-PYh" secondAttribute="height" multiplier="1:1" id="pmW-WT-yIh"/>
+                            <constraint firstAttribute="width" secondItem="KlI-y0-xdK" secondAttribute="height" multiplier="1:1" id="bFa-mW-Ahp"/>
+                            <constraint firstAttribute="height" constant="50" id="zdd-Pg-242"/>
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain"/>
@@ -36,19 +36,19 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="vus-oC-PYh" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="dqJ-Mg-EMR"/>
-                <constraint firstItem="vus-oC-PYh" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fyb-1W-Li4"/>
+                <constraint firstItem="KlI-y0-xdK" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jfa-Ey-J5U"/>
+                <constraint firstItem="KlI-y0-xdK" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bZs-a2-aPt"/>
             </constraints>
             <size key="customSize" width="195" height="190"/>
             <connections>
-                <outlet property="button" destination="vus-oC-PYh" id="WIB-Kj-muW"/>
+                <outlet property="roundButton" destination="KlI-y0-xdK" id="MB7-cD-Fxc"/>
             </connections>
             <point key="canvasLocation" x="242.75362318840581" y="136.60714285714286"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -65,7 +65,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waW-ZW-KEC">
                                 <rect key="frame" x="157" y="515" width="100" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="pbR-QS-XAp"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="pbR-QS-XAp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -103,9 +103,38 @@
                     <view key="view" contentMode="scaleToFill" id="JYI-4b-zSI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Aad-iJ-Ilb">
+                                <rect key="frame" x="0.0" y="408" width="414" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Row Index:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-JS-Ah1">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Index:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7B-0V-11k">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="5Vk-XA-ccW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Aad-iJ-Ilb" firstAttribute="leading" secondItem="5Vk-XA-ccW" secondAttribute="leading" id="2bq-hA-GYv"/>
+                            <constraint firstItem="Aad-iJ-Ilb" firstAttribute="centerX" secondItem="JYI-4b-zSI" secondAttribute="centerX" id="408-Xw-SUZ"/>
+                            <constraint firstItem="Aad-iJ-Ilb" firstAttribute="centerY" secondItem="JYI-4b-zSI" secondAttribute="centerY" id="hX6-5X-2TY"/>
+                            <constraint firstItem="5Vk-XA-ccW" firstAttribute="trailing" secondItem="Aad-iJ-Ilb" secondAttribute="trailing" id="iFL-gl-vp6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionIndexLabel" destination="d7B-0V-11k" id="6mR-Al-L52"/>
+                        <outlet property="rowIndexLabel" destination="FLi-JS-Ah1" id="Xmv-GI-Rlb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qPi-eH-urF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

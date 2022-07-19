@@ -12,48 +12,36 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     static let reuseIdentifier = "MainTableViewCell"
     var rowNumber: Int = 0
+    var sendRowIndexBack: ((_ index: Int, _ color: UIColor) ->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        let cellWidth = CGFloat(self.frame.width - 40) / 5
+        let cellHeight = CGFloat(80)
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: 80, height: 80)
-        flowLayout.minimumLineSpacing = 2.0
-        flowLayout.minimumInteritemSpacing = 5.0
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        flowLayout.minimumLineSpacing = 0.0
+        flowLayout.minimumInteritemSpacing = 0.0
         collectionView.collectionViewLayout = flowLayout
         collectionView.showsHorizontalScrollIndicator = false
-        
-        // Comment if you set Datasource and delegate in .xib
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .green
         
         // Register the xib for collection view cell
         let cellNib = UINib(nibName: MainCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(cellNib, forCellWithReuseIdentifier: MainCollectionViewCell.reuseIdentifier)
     }
     
-    override func prepareForReuse() {
-        //        self.backgroundColor = .yellow
-    }
+    override func prepareForReuse() {}
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
 }
 
 extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    // The data we passed from the TableView send them to the CollectionView Model
-    //    func updateCellWith(row: [CollectionViewCellModel]) {
-    //        self.rowWithColors = row
-    //        self.collectionView.reloadData()
-    //    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return rowNumber
     }
@@ -65,14 +53,24 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     // Set the data for each cell (color and color name)
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reuseIdentifier, for: indexPath) as? MainCollectionViewCell {
-            //            cell.colorView.backgroundColor = self.rowWithColors?[indexPath.item].color ?? UIColor.black
+            // Remove this code
+//            if indexPath.row % 2 == 0 { cell.backgroundColor = .green } else {
+//                cell.backgroundColor = .yellow
+//            }
+            cell.roundButton.tag = indexPath.row
+            cell.roundButton.addTarget(self, action: #selector(roundButtonTap(sender:)), for: .touchUpInside)
             return cell
         }
         return UICollectionViewCell()
     }
-    
-    // Add spaces at the beginning and the end of the collection view
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+}
+
+extension MainTableViewCell {
+    @objc func roundButtonTap(sender: UIButton) {
+        debugPrint("Circle Button Tag: \(sender.tag)")
+        guard let cell = collectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0)) as? MainCollectionViewCell else {
+            return
+        }
+        sendRowIndexBack?(sender.tag, cell.roundButton.backgroundColor ?? .white)
     }
 }
