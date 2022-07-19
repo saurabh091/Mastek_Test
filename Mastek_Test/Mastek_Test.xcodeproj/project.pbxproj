@@ -15,6 +15,8 @@
 		2061C84E288694B40013252C /* CustomHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2061C84D288694B40013252C /* CustomHeader.xib */; };
 		2061C8522886A6370013252C /* SecondaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2061C8502886A6370013252C /* SecondaryTableViewCell.swift */; };
 		2061C8532886A6370013252C /* SecondaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2061C8512886A6370013252C /* SecondaryTableViewCell.xib */; };
+		20DF2D8A2886EA05000B0F63 /* RowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DF2D892886EA05000B0F63 /* RowsViewController.swift */; };
+		20DF2D8E2886ED09000B0F63 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DF2D8D2886ED09000B0F63 /* ResultViewController.swift */; };
 		20F092A92885D1EB00ED2723 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F092A82885D1EB00ED2723 /* AppDelegate.swift */; };
 		20F092AB2885D1EB00ED2723 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F092AA2885D1EB00ED2723 /* SceneDelegate.swift */; };
 		20F092B02885D1EB00ED2723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20F092AE2885D1EB00ED2723 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 		2061C84D288694B40013252C /* CustomHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeader.xib; sourceTree = "<group>"; };
 		2061C8502886A6370013252C /* SecondaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryTableViewCell.swift; sourceTree = "<group>"; };
 		2061C8512886A6370013252C /* SecondaryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondaryTableViewCell.xib; sourceTree = "<group>"; };
+		20DF2D892886EA05000B0F63 /* RowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowsViewController.swift; sourceTree = "<group>"; };
+		20DF2D8D2886ED09000B0F63 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		20F092A52885D1EB00ED2723 /* Mastek_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mastek_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F092A82885D1EB00ED2723 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20F092AA2885D1EB00ED2723 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,38 @@
 			path = SecondaryTableViewCell;
 			sourceTree = "<group>";
 		};
+		20DF2D872886E9C2000B0F63 /* RowsView */ = {
+			isa = PBXGroup;
+			children = (
+				20DF2D882886E9E8000B0F63 /* ViewController */,
+			);
+			path = RowsView;
+			sourceTree = "<group>";
+		};
+		20DF2D882886E9E8000B0F63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20DF2D892886EA05000B0F63 /* RowsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		20DF2D8B2886ECDF000B0F63 /* ResultView */ = {
+			isa = PBXGroup;
+			children = (
+				20DF2D8C2886ECF4000B0F63 /* ViewController */,
+			);
+			path = ResultView;
+			sourceTree = "<group>";
+		};
+		20DF2D8C2886ECF4000B0F63 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20DF2D8D2886ED09000B0F63 /* ResultViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		20F0929C2885D1EA00ED2723 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +171,8 @@
 		20F092BD2886847700ED2723 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				20DF2D8B2886ECDF000B0F63 /* ResultView */,
+				20DF2D872886E9C2000B0F63 /* RowsView */,
 				20F092BC2886845D00ED2723 /* MainView */,
 			);
 			path = Modules;
@@ -235,8 +273,10 @@
 				2061C84928868B930013252C /* MainCollectionViewCell.swift in Sources */,
 				2061C84228868A380013252C /* MainTableViewCell.swift in Sources */,
 				20F092C12886857D00ED2723 /* MainViewController.swift in Sources */,
+				20DF2D8A2886EA05000B0F63 /* RowsViewController.swift in Sources */,
 				2061C8522886A6370013252C /* SecondaryTableViewCell.swift in Sources */,
 				2061C84C288694910013252C /* CustomHeader.swift in Sources */,
+				20DF2D8E2886ED09000B0F63 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

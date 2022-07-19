@@ -23,8 +23,32 @@ class MainViewController: UIViewController {
         self.tableView.register(secondaryCellNib, forCellReuseIdentifier: SecondaryTableViewCell.reuseIdentifier)
         
 //        tableView.register(UINib(nibName: "CustomHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: CustomHeader.reuseIdentifier)
+        
+        let rightButtonItem = UIBarButtonItem.init(
+              title: "Update No. of Rows",
+              style: .done,
+              target: self,
+              action: #selector(rightButtonAction)
+        )
+
+        self.navigationItem.rightBarButtonItem = rightButtonItem
     }
     
+    @objc func rightButtonAction(sender: UIBarButtonItem) {
+        debugPrint("**************************    rightButtonAction    **************************")
+        
+        
+        let rowsViewController: RowsViewController = self.storyboard?.instantiateViewController(withIdentifier: "RowsViewController") as! RowsViewController
+        
+        rowsViewController.onCompletion = { rowString in
+            // this will be executed when `someButtonTapped(_:)` will be called
+            debugPrint("************* \(rowString)")
+        }
+        
+        let navigationController = UINavigationController(rootViewController: rowsViewController)
+        navigationController.modalPresentationStyle = UIModalPresentationStyle.popover
+        self.present(navigationController, animated: true, completion: nil)
+    }
     
     /*
      // MARK: - Navigation
@@ -80,7 +104,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: SecondaryTableViewCell.reuseIdentifier) as? SecondaryTableViewCell {
-                cell.backgroundColor = .cyan
+                cell.backView.backgroundColor = .random
                 return cell
             }
         }
@@ -88,10 +112,26 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let resultViewController: ResultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        navigationController?.pushViewController(resultViewController, animated: true)
+    }
 }
 
 extension MainViewController: CustomHeaderDelegate {
     func customHeader(_ customHeader: CustomHeader, didTapButtonInSection section: Int) {
         print("did tap button", section)
+    }
+}
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 1.0
+        )
     }
 }
