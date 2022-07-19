@@ -43,6 +43,74 @@
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="66.964285714285708"/>
         </scene>
+        <!--Rows View Controller-->
+        <scene sceneID="9eB-gG-gsG">
+            <objects>
+                <viewController storyboardIdentifier="RowsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="baW-i2-rL6" customClass="RowsViewController" customModule="Mastek_Test" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7yt-wL-Gqd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jHl-BP-C7Q">
+                                <rect key="frame" x="50" y="431" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the number of rows" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNV-aq-KUQ">
+                                <rect key="frame" x="62" y="348.5" width="290.5" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waW-ZW-KEC">
+                                <rect key="frame" x="157" y="515" width="100" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="pbR-QS-XAp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneAction:" destination="baW-i2-rL6" eventType="touchUpInside" id="spi-zW-FUZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YLS-vF-jBO"/>
+                        <color key="backgroundColor" red="0.35327577589999998" green="0.7827039361" blue="0.97602659459999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jHl-BP-C7Q" firstAttribute="top" secondItem="bNV-aq-KUQ" secondAttribute="bottom" constant="50" id="9kw-13-bpP"/>
+                            <constraint firstItem="jHl-BP-C7Q" firstAttribute="centerY" secondItem="7yt-wL-Gqd" secondAttribute="centerY" id="IFk-ji-3tj"/>
+                            <constraint firstItem="waW-ZW-KEC" firstAttribute="centerX" secondItem="7yt-wL-Gqd" secondAttribute="centerX" id="OLY-0n-HAh"/>
+                            <constraint firstItem="jHl-BP-C7Q" firstAttribute="centerX" secondItem="7yt-wL-Gqd" secondAttribute="centerX" id="Qkr-UT-O6H"/>
+                            <constraint firstItem="YLS-vF-jBO" firstAttribute="trailing" secondItem="jHl-BP-C7Q" secondAttribute="trailing" constant="50" id="Y8f-As-qu1"/>
+                            <constraint firstItem="bNV-aq-KUQ" firstAttribute="centerX" secondItem="7yt-wL-Gqd" secondAttribute="centerX" id="bmq-N4-aiw"/>
+                            <constraint firstItem="waW-ZW-KEC" firstAttribute="top" secondItem="jHl-BP-C7Q" secondAttribute="bottom" constant="50" id="f1K-wF-IVh"/>
+                            <constraint firstItem="jHl-BP-C7Q" firstAttribute="leading" secondItem="YLS-vF-jBO" secondAttribute="leading" constant="50" id="grS-SZ-Ztj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="rowsTextField" destination="jHl-BP-C7Q" id="d1W-3L-eVo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Sl-L3-u5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1829" y="67"/>
+        </scene>
+        <!--Result View Controller-->
+        <scene sceneID="mGJ-tp-fM2">
+            <objects>
+                <viewController storyboardIdentifier="ResultViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SxO-bA-DaB" customClass="ResultViewController" customModule="Mastek_Test" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JYI-4b-zSI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="5Vk-XA-ccW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qPi-eH-urF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2694" y="67"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="pGa-zG-bki">
             <objects>
