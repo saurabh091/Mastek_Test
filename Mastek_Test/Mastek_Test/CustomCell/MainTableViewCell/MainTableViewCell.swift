@@ -10,28 +10,30 @@ import UIKit
 class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    static let reuseIdentifier = "MainTableViewCell"
     var rowNumber: Int = 0
     var sendRowIndexBack: ((_ index: Int, _ color: UIColor) ->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let cellWidth = CGFloat(self.frame.width - 40) / 5
-        let cellHeight = CGFloat(80)
+        setupCell()
+    }
+    
+    func setupCell() {
+        let cellWidth = (self.frame.width - Constant.sideSpace) / Constant.cellCount
+        let cellHeight = Constant.cellHeight
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        flowLayout.minimumLineSpacing = 0.0
-        flowLayout.minimumInteritemSpacing = 0.0
+        flowLayout.minimumLineSpacing = Constant.minimumSpacing
+        flowLayout.minimumInteritemSpacing = Constant.minimumSpacing
         collectionView.collectionViewLayout = flowLayout
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
         collectionView.delegate = self
         
         // Register the xib for collection view cell
-        let cellNib = UINib(nibName: MainCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(cellNib, forCellWithReuseIdentifier: MainCollectionViewCell.reuseIdentifier)
+        collectionView.register(UINib(nibName: Constant.mainCVCellIdentifier, bundle: nil), forCellWithReuseIdentifier: Constant.mainCVCellIdentifier)
     }
     
     override func prepareForReuse() {}
@@ -47,16 +49,12 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return Constant.tableViewSection
     }
     
     // Set the data for each cell (color and color name)
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reuseIdentifier, for: indexPath) as? MainCollectionViewCell {
-            // Remove this code
-//            if indexPath.row % 2 == 0 { cell.backgroundColor = .green } else {
-//                cell.backgroundColor = .yellow
-//            }
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constant.mainCVCellIdentifier, for: indexPath) as? MainCollectionViewCell {
             cell.roundButton.tag = indexPath.row
             cell.roundButton.addTarget(self, action: #selector(roundButtonTap(sender:)), for: .touchUpInside)
             return cell
@@ -67,7 +65,6 @@ extension MainTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension MainTableViewCell {
     @objc func roundButtonTap(sender: UIButton) {
-        debugPrint("Circle Button Tag: \(sender.tag)")
         guard let cell = collectionView.cellForItem(at: IndexPath(item: sender.tag, section: 0)) as? MainCollectionViewCell else {
             return
         }

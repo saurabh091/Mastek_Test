@@ -14,18 +14,24 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setup()
+    }
+    
+    func setup() {
         // Register the xib for tableview cell
-        self.tableView.register(UINib(nibName: MainTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: MainTableViewCell.reuseIdentifier)
-        self.tableView.register(UINib(nibName: SecondaryTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: SecondaryTableViewCell.reuseIdentifier)
+        self.tableView.register(UINib(nibName: Constant.mainTableViewCellIdentifier, bundle: nil), forCellReuseIdentifier: Constant.mainTableViewCellIdentifier)
+        self.tableView.register(UINib(nibName: Constant.secondaryCellIdentifier, bundle: nil), forCellReuseIdentifier: Constant.secondaryCellIdentifier)
         
-        let rightButtonItem = UIBarButtonItem.init(title: "Update No. of Rows", style: .done, target: self, action: #selector(rightButtonAction)
+        // setup right bar button
+        let rightButtonItem = UIBarButtonItem.init(title: Constant.rightBarButtonTitle, style: .done, target: self, action: #selector(rightButtonAction)
         )
         self.navigationItem.rightBarButtonItem = rightButtonItem
     }
     
+    /// Function on click of  Right bar button
+    /// - Parameter sender: Instance of UIBarButtonItem
     @objc func rightButtonAction(sender: UIBarButtonItem) {
-        let rowsViewController: RowsViewController = self.storyboard?.instantiateViewController(withIdentifier: "RowsViewController") as! RowsViewController
+        let rowsViewController: RowsViewController = self.storyboard?.instantiateViewController(withIdentifier: Constant.rowsViewIdentifier) as! RowsViewController
         
         rowsViewController.sendDataBack = { [weak self] rowString in
             guard let self = self else { return }
@@ -41,7 +47,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Constant.tableViewSection
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,23 +55,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CGFloat(Constant.rowHeight)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 4 == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.reuseIdentifier) as? MainTableViewCell {
+        if indexPath.row % Constant.tableViewCollectionRow == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Constant.mainTableViewCellIdentifier) as? MainTableViewCell {
                 cell.rowNumber = rowNumber
                 cell.collectionView.reloadData()
                 cell.sendRowIndexBack = { [weak self] rowIndex, cellColor in
-                    debugPrint(rowIndex)
                     guard let self = self else { return }
                     self.navigateToResultView(rowIndex: indexPath.row, index: rowIndex, color: cellColor)
                 }
                 return cell
             }
         } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: SecondaryTableViewCell.reuseIdentifier) as? SecondaryTableViewCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Constant.secondaryCellIdentifier) as? SecondaryTableViewCell {
                 cell.backView.backgroundColor = .random
                 return cell
             }
@@ -80,22 +85,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         navigateToResultView(rowIndex: indexPath.row, index: nil, color: cell.backView.backgroundColor ?? .white)
     }
     
+    /// Function to navigate the Result View
+    /// - Parameters:
+    ///   - rowIndex: TableView Row IndexPath row
+    ///   - index: Collection View IndexPath row
+    ///   - color: UiColor
     func navigateToResultView(rowIndex: Int?, index: Int?, color: UIColor) {
-        let resultView: ResultViewController = self.storyboard?.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
+        let resultView: ResultViewController = self.storyboard?.instantiateViewController(withIdentifier: Constant.resultViewIdentifier) as! ResultViewController
         resultView.row = rowIndex
         resultView.collectionIndex = index
         resultView.backGroundColor = color
         navigationController?.pushViewController(resultView, animated: true)
-    }
-}
-
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1),
-            alpha: 1.0
-        )
     }
 }

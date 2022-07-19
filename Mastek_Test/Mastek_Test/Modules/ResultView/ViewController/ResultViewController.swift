@@ -24,7 +24,7 @@ class ResultViewController: UIViewController {
         if let color = backGroundColor {
             view.backgroundColor = color
         } else {
-            debugPrint("backGroundColor is nil.")
+            debugPrint(Constant.backGroundColorError)
         }
         
         if let rowIndex = row {

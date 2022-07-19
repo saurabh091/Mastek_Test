@@ -20,10 +20,10 @@ class RowsViewController: UIViewController {
     }
     
     @IBAction func doneAction(_ sender: Any) {
-        sendDataBack?(rowsTextField.text ?? "")
+        sendDataBack?(rowsTextField.text ?? Constant.blankSpace)
         navigationController?.dismiss(animated: true)
     }
-
+    
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         rowsTextField.resignFirstResponder()
     }

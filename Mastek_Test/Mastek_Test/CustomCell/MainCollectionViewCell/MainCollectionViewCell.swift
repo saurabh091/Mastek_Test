@@ -9,7 +9,6 @@ import UIKit
 
 class MainCollectionViewCell: UICollectionViewCell {
     
-    static let reuseIdentifier = "MainCollectionViewCell"
     @IBOutlet weak var roundButton: UIButton!
     
     override func awakeFromNib() {
